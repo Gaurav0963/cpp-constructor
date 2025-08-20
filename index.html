@@ -9,17 +9,37 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* Disable text selection and copying across the whole page */
+            user-select: none;
+            -webkit-user-select: none; /* For Safari */
+            -moz-user-select: none;    /* For Firefox */
+            -ms-user-select: none;     /* For Internet Explorer/Edge */
         }
         /* Simple syntax highlighting for C++ keywords */
-        .code-block .keyword { color: #c586c0; } /* Pink/Purple for keywords */
-        .code-block .type { color: #4ec9b0; } /* Teal for types */
-        .code-block .string { color: #ce9178; } /* Orange for strings */
-        .code-block .comment { color: #6a9955; } /* Green for comments */
-        .code-block .number { color: #b5cea8; } /* Light green for numbers */
-        .code-block .preprocessor { color: #9b9b9b; } /* Gray for preprocessor */
+        .code-block .keyword { color: #c586c0; }
+        .code-block .type { color: #4ec9b0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .comment { color: #6a9955; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .preprocessor { color: #9b9b9b; }
+
+        /* Black overlay for screenshot blocking */
+        .screenshot-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+            display: none; /* Hidden by default */
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+
+    <!-- This div is used to block screenshots -->
+    <div id="screenshot-blocker" class="screenshot-overlay"></div>
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <!-- Header -->
@@ -30,7 +50,7 @@
 
         <main class="space-y-12">
             <!-- Problem 1: The Book Class -->
-            <section id="problem1" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <section id="problem1" class="bg-white p-6 rounded-xl shadow-lg">
                 <h2 class="text-2xl font-semibold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4">Problem 1: The `Book` Class</h2>
                 
                 <div>
@@ -81,7 +101,7 @@ Year: 1979
             </section>
 
             <!-- Problem 2: The Student Class -->
-            <section id="problem2" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <section id="problem2" class="bg-white p-6 rounded-xl shadow-lg">
                 <h2 class="text-2xl font-semibold text-teal-700 border-b-2 border-teal-200 pb-2 mb-4">Problem 2: The `Student` Class</h2>
 
                 <div>
@@ -134,10 +154,46 @@ GPA: 3.8
 
         <!-- Footer -->
         <footer class="text-center mt-12 py-4 border-t border-gray-300">
-            <p class="text-gray-500">&copy; 2025 C++ Constructor Lab</p>
+            <p class="text-gray-500">&copy; 2024 C++ Constructor Lab</p>
         </footer>
 
     </div>
+
+    <script>
+        // This script attempts to block screenshots by flashing a black overlay.
+        // Note: This is not a foolproof method and can be bypassed.
+        const blocker = document.getElementById('screenshot-blocker');
+
+        function showOverlay() {
+            blocker.style.display = 'block';
+            // Hide the overlay after a very short delay
+            setTimeout(() => {
+                blocker.style.display = 'none';
+            }, 150); // 150 milliseconds should be fast enough
+        }
+
+        document.addEventListener('keydown', function(e) {
+            // Check for the PrintScreen key (though its detection is unreliable)
+            if (e.key === 'PrintScreen') {
+                e.preventDefault(); // This may not always work
+                showOverlay();
+            }
+
+            // A more reliable check for common shortcuts like Cmd+Shift+3/4 or Ctrl+PrtScn
+            if ((e.metaKey || e.ctrlKey) && e.shiftKey) {
+                 showOverlay();
+            }
+        });
+
+        // Also listen for the 'keyup' on the Alt key, which is often used in Windows Snipping Tool
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'Alt') {
+                // This is a less direct guess, but can deter some screenshot methods
+                showOverlay();
+            }
+        });
+
+    </script>
 
 </body>
 </html>
