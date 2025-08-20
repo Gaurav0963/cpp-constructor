@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Lab: Constructors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple syntax highlighting for C++ keywords */
+        .code-block .keyword { color: #c586c0; } /* Pink/Purple for keywords */
+        .code-block .type { color: #4ec9b0; } /* Teal for types */
+        .code-block .string { color: #ce9178; } /* Orange for strings */
+        .code-block .comment { color: #6a9955; } /* Green for comments */
+        .code-block .number { color: #b5cea8; } /* Light green for numbers */
+        .code-block .preprocessor { color: #9b9b9b; } /* Gray for preprocessor */
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">C++ Lab: Understanding Constructors</h1>
+            <p class="mt-2 text-lg text-gray-600">Objective: Implement default, parameterized, and copy constructors in C++.</p>
+        </header>
+
+        <main class="space-y-12">
+            <!-- Problem 1: The Book Class -->
+            <section id="problem1" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <h2 class="text-2xl font-semibold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4">Problem 1: The `Book` Class</h2>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Problem Statement</h3>
+                    <p class="text-gray-700">Create a C++ class named `Book` to store details about books in a library, including title, author, and publication year.</p>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Class Specification</h3>
+                    <p class="mb-2 text-gray-700">The `Book` class should have the following private members:</p>
+                    <ul class="list-disc list-inside bg-gray-50 p-4 rounded-lg space-y-2">
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">title</code>: A `std::string` for the book's title.</li>
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">author</code>: A `std::string` for the author's name.</li>
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">year</code>: An `int` for the publication year.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Required Public Members</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li><strong>Default Constructor:</strong> Takes no arguments. Initializes `title` to "Untitled", `author` to "Unknown", and `year` to 0.</li>
+                        <li><strong>Parameterized Constructor:</strong> Accepts `title`, `author`, and `year` to initialize the member variables.</li>
+                        <li><strong>Copy Constructor:</strong> Takes a constant reference to another `Book` object and creates a copy. It should print a confirmation message.</li>
+                        <li><strong>`display()` Method:</strong> Prints the details of the book.</li>
+                    </ol>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Expected Output</h3>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto text-sm code-block"><code class="language-cpp">--- Book 1 (Default Constructor) ---
+Title: Untitled
+Author: Unknown
+Year: 0
+
+--- Book 2 (Parameterized Constructor) ---
+Title: The Hitchhiker's Guide to the Galaxy
+Author: Douglas Adams
+Year: 1979
+
+--- Book 3 (Copy of Book 2) ---
+<span class="comment">// This line confirms the copy constructor was called</span>
+Book copy constructor called.
+Title: The Hitchhiker's Guide to the Galaxy
+Author: Douglas Adams
+Year: 1979
+</code></pre>
+                </div>
+            </section>
+
+            <!-- Problem 2: The Student Class -->
+            <section id="problem2" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <h2 class="text-2xl font-semibold text-teal-700 border-b-2 border-teal-200 pb-2 mb-4">Problem 2: The `Student` Class</h2>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Problem Statement</h3>
+                    <p class="text-gray-700">Design a C++ class named `Student` to hold basic information about a student, including their name, student ID, and GPA.</p>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Class Specification</h3>
+                    <p class="mb-2 text-gray-700">The `Student` class should have the following private members:</p>
+                    <ul class="list-disc list-inside bg-gray-50 p-4 rounded-lg space-y-2">
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">name</code>: A `std::string` for the student's name.</li>
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">studentID</code>: An `int` for the student's ID.</li>
+                        <li><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded">gpa</code>: A `double` for the student's GPA.</li>
+                    </ul>
+                </div>
+                
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Required Public Members</h3>
+                     <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li><strong>Default Constructor:</strong> Takes no arguments. Initializes `name` to "No Name", `studentID` to 0, and `gpa` to 0.0.</li>
+                        <li><strong>Parameterized Constructor:</strong> Accepts `name`, `studentID`, and `gpa` to initialize the member variables.</li>
+                        <li><strong>Copy Constructor:</strong> Takes a constant reference to another `Student` object and creates a copy, printing a confirmation message.</li>
+                        <li><strong>`displayDetails()` Method:</strong> Prints the student's details.</li>
+                    </ol>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Expected Output</h3>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto text-sm code-block"><code class="language-cpp">--- Student 1 (Default Constructor) ---
+Name: No Name
+Student ID: 0
+GPA: 0.0
+
+--- Student 2 (Parameterized Constructor) ---
+Name: Jane Doe
+Student ID: 12345
+GPA: 3.8
+
+--- Student 3 (Copy of Student 2) ---
+<span class="comment">// This line confirms the copy constructor was called</span>
+Student copy constructor called.
+Name: Jane Doe
+Student ID: 12345
+GPA: 3.8
+</code></pre>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-4 border-t border-gray-300">
+            <p class="text-gray-500">&copy; 2025 C++ Constructor Lab</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
